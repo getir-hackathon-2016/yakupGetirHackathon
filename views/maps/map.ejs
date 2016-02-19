@@ -1,0 +1,39 @@
+<ui-gmap-google-map class="col-md-12"
+                    center="map.center"
+                    zoom="map.zoom"
+                    dragging="map.dragging"
+                    bounds="map.bounds"
+                    events="map.events"
+                    options="map.options"
+                    pan="true"
+                    control="map.control">
+
+  <!-- predefined markers -->
+  <!-- rendering via ng-repear, HIGH OVERHEAD via DOM Manipulation -->
+  <ui-gmap-marker ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)"
+                  idKey="1" options="m.options">
+    <ui-gmap-window ng-cloak coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false"
+                    options="map.infoWindowWithCustomClass.options">
+      <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+      <p class="muted">My marker will stay open when the window is popped up!</p>
+    </ui-gmap-window>
+  </ui-gmap-marker>
+
+
+  <ui-gmap-marker ng-repeat="m in map.clickMarkers" coords="m" icon="m.icon" click="onMarkerClicked(m)"
+                  idKey="1" options="m.options">
+    <ui-gmap-window ng-cloak coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false"
+                    options="map.infoWindowWithCustomClass.options">
+      <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+      <p class="muted">My marker will stay open when the window is popped up!</p>
+    </ui-gmap-window>
+  </ui-gmap-marker>
+
+  <ui-gmap-marker coords="map.clickedMarker"  idKey="map.clickedMarker.id" options="map.clickedMarker.options">
+    <ui-gmap-window isIconVisibleOnClick="true" options="map.infoWindowWithCustomClass.options">This is my clicked marker!
+      <p class="muted">My marker will reappear when you close me.</p>
+    </ui-gmap-window>
+  </ui-gmap-marker>
+
+
+</ui-gmap-google-map>
