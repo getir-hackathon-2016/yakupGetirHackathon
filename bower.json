@@ -12,6 +12,8 @@
   "homepage": "",
   "private": true,
   "dependencies": {
-    "bootstrap": "^3.3.6"
+    "bootstrap": "^3.3.6",
+    "angular-google-maps": "^2.3.2",
+    "angular-route": "^1.5.0"
   }
 }

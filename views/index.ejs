@@ -1,5 +1,17 @@
 <% layout('layout') -%>
-<h1>Members Area</h1>
+<h1>Products</h1>
 <p>
-  Welcome to the members area
+  Welcome
 </p>
+<div ng-controller="MapsController">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+
+    <ui-gmap-marker idkey="1" ng-repeat="m in map.markers" coords="m" icon="m.icon" click="onMarkerClicked(m)" idKey="m.id" options="m.options">
+      <ui-gmap-window ng-cloak  coords="map.infoWindowWithCustomClass.coords" isIconVisibleOnClick="false" options="map.infoWindowWithCustomClass.options">
+        <p>This is an info window at {{ m.latitude | number:4 }}, {{ m.longitude | number:4 }}!</p>
+        <p class="muted">My marker will stay open when the window is popped up!</p>
+      </ui-gmap-window>
+    </ui-gmap-marker>
+
+  </ui-gmap-google-map>
+</div>
