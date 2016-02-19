@@ -1,0 +1,17 @@
+{
+  "name": "node-user-auth-app",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Yakup Adaklı <yakup.adakli@hotmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^3.3.6"
+  }
+}
