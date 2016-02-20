@@ -12,7 +12,7 @@ var ProductSchema = mongoose.Schema({
     type: String
   },
   stock_count: {
-    type: String
+    type: Number
   }
 });
 
@@ -23,7 +23,7 @@ module.exports.createProduct = function (product, callback) {
 };
 
 module.exports.getProductList = function (callback) {
-  Product.find();
+  Product.find(callback);
 };
 
 module.exports.getProductByUserId = function (user_id, callback) {

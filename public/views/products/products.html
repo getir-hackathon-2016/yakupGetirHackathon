@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-lg-3  " ng-repeat="product in products">
+    <div class="image">
+      <img ng-src="{{product.image}}" class="img-thumbnail" style="height: 200px">
+    </div>
+    <div class="product-info">
+      <h4>{{product.name}}</h4>
+      <p>
+        {{product.price | currency}}
+      </p>
+      <p>
+        <a href="#/cart">Add to Cart</a>
+      </p>
+    </div>
+  </div>
+</div>

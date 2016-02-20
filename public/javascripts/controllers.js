@@ -1,9 +1,10 @@
 angular.module('myApp')
 
-    .controller('HomeController', function ($scope, $log) {
+    .controller('HomeController', function ($scope) {
 
     })
-    .controller('InfoController', function ($scope, $log) {
+
+    .controller('InfoController', function ($scope) {
       $scope.templateValue = 'hello from the template itself';
       $scope.clickedButtonInWindow = function () {
         var msg = 'clicked a window in the template!';
@@ -11,6 +12,13 @@ angular.module('myApp')
         alert(msg);
       }
     })
+
+    .controller('ProductController', ['$scope', '$http', function ($scope, $http) {
+      console.log('ProductController');
+      $http.get('/products').success(function (data, status) {
+        $scope.products = data;
+      });
+    }])
 
     .controller('AddressController',['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
       $scope.latitude = 0;
