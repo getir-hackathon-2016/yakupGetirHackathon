@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th width="650">Item</th>
+    <th width="100">Quantity</th>
+    <th width="100">Total</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="item in cart.items">
+    <td>
+      {{item.name}}
+    </td>
+    <td>{{item.qty}}</td>
+    <td>
+      {{item.qty * item.price}}
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div class="row">
+  <div class="col-md-11 text-right">
+    <h4>Total: <strong>{{cart.total}}</strong></h4>
+  </div>
+</div>

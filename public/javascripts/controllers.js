@@ -13,11 +13,25 @@ angular.module('myApp')
       }
     })
 
-    .controller('ProductController', ['$scope', '$http', function ($scope, $http) {
-      console.log('ProductController');
+    .controller('ProductController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+
       $http.get('/products').success(function (data, status) {
         $scope.products = data;
       });
+
+      $scope.addCart = function(product_id){
+        $http.post('/cart/' + product_id, {}).success(function (data, status) {
+          $scope.cart = data.cart;
+          $location.path('/cart');
+        });
+      };
+    }])
+    .controller('CartController', ['$scope', '$http', function ($scope, $http) {
+      console.log('CartController');
+      $http.get('/cart').success(function (data, status) {
+        $scope.cart = data.cart;
+      });
+
     }])
 
     .controller('AddressController',['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {

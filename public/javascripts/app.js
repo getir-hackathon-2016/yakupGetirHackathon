@@ -25,5 +25,9 @@ app.config(['$routeProvider', 'uiGmapGoogleMapApiProvider', function ($routeProv
         templateUrl: 'views/products/products.html',
         controller: 'ProductController'
       }).
+      when('/cart', {
+        templateUrl: 'views/carts/cart.html',
+        controller: 'CartController'
+      }).
       otherwise({redirectTo: '/home'});
 }]);

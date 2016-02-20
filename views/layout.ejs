@@ -32,6 +32,9 @@
             <li <% if (active_nav == 'members') {%> class="active" <% } %> >
               <a href="#/products">Products</a>
             </li>
+            <li <% if (active_nav == 'cart') {%> class="active" <% } %> >
+              <a href="#/cart">Cart</a>
+            </li>
             <% if (!user) { %>
               <li <% if (active_nav == 'register') {%> class="active" <% } %> >
                 <a href="/users/register">Register</a>
