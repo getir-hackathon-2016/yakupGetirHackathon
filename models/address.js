@@ -5,11 +5,11 @@ var AddressSchema = mongoose.Schema({
   title: {
     type: String
   },
-  lat: {
+  latitude: {
     type: String,
     require: true
   },
-  long: {
+  longitude: {
     type: String,
     require: true
   },
@@ -30,9 +30,13 @@ module.exports.getAddressList = function (callback) {
 
 module.exports.getAddressByUserId = function (user_id, callback) {
   var query = {user_id: user_id};
-  Address.findOne(query, callback);
+  Address.find(query, callback);
 };
 
 module.exports.getAddressById = function (id, callback) {
   Address.findById(id, callback);
+};
+
+module.exports.removeAddress = function (id, callback) {
+  Address.find({_id: id}).remove(callback);
 };

@@ -4,7 +4,12 @@ var utils = require('../utils/utils');
 var Address = require('../models/address');
 
 router.get('/', utils.ensureAuthenticated, function(req, res, next) {
-  res.render('index', {active_nav: 'home' });
+  Address.getAddressByUserId(req.user._id,function (error, addresses) {
+    if (error) {
+      console.log(error);
+    }
+    res.json(addresses);
+  });
 });
 
 router.post('/', utils.ensureAuthenticated, function(req, res, next) {
@@ -23,8 +28,20 @@ router.post('/', utils.ensureAuthenticated, function(req, res, next) {
     if (error) {
       console.log(error);
     }
+    res.json(address);
   });
-  res.render('address', {active_nav: 'home' });
+});
+
+router.delete('/:id', function (req, res, next) {
+  var id = req.params.id;
+
+  Address.removeAddress(id, function (error, article) {
+    if (error) {
+      console.log(error);
+    }
+    res.location('/index');
+    res.redirect('/index');
+  });
 });
 
 module.exports = router;

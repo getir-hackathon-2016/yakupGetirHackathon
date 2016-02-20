@@ -1,5 +1,5 @@
-<div class="row" ng-controller="MapsController">
-  <div>
+<div class="row">
+  <div ng-controller="MapsController">
     <ui-gmap-google-map class="col-md-8"
                         center="map.center"
                         zoom="map.zoom"
@@ -38,13 +38,20 @@
       </ui-gmap-marker>
     </ui-gmap-google-map>
   </div>
-  <div class="col-lg-4">
-    <div>
-      <ul>
-        <li ng-repeat="address in user_addresses">
-          {{address.title}} | <a href="#" ng-click="removeAddress(address._id)">Delete</a>
-        </li>
-      </ul>
-    </div>
+  <div class="col-lg-4" ng-controller="AddressController">
+    <form ng-submit="addAdress()">
+      <div class="form-group">
+        <input type="text" placeholder="Enter Address Title" ng-model="title" name="title" class="form-control" />
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Address"/>
+    </form>
   </div>
 </div>
+
+<div class="row">
+  <h1>Products</h1>
+  <p>
+    Welcome
+  </p>
+</div>
+
