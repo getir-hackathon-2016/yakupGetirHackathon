@@ -1,4 +1,5 @@
 var express = require('express');
+var socket_io = require("socket.io");
 var engine = require('ejs-mate');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -26,6 +27,10 @@ var products = require('./routes/products');
 var cart = require('./routes/cart');
 
 var app = express();
+
+// Socket.io
+var io = socket_io();
+app.io = io;
 
 app.engine('ejs', engine);
 
@@ -121,6 +126,47 @@ app.use(function(err, req, res, next) {
     message: err.message,
     error: {}
   });
+});
+
+
+
+usernames = [];
+
+//start listen with socket.io
+app.io.sockets.on('connection', function (socket) {
+  console.log('User Connected.');
+
+  socket.on('add cart', function (data, callback) {
+    console.log('Add Cart' + data);
+    if (usernames.indexOf(data) != -1 || data.trim() == "") {
+      callback(false);
+    }
+    else {
+      callback(true);
+      socket.username = data;
+      usernames.push(socket.username);
+      updateUsernames();
+      msg = socket.username + " joined chat";
+      io.sockets.emit('new message', {user: socket.username, msg: msg});
+    }
+  });
+
+  // Update Usernames
+  function updateUsernames() {
+    io.sockets.emit('usernames', usernames);
+  }
+
+  socket.on('send message', function (data) {
+    console.log('Send Message');
+    io.sockets.emit('new message', {msg: data, user: socket.username});
+  });
+
+  // Disconnect
+  socket.on('disconnect', function (data) {
+    if (!socket.username) return;
+    usernames.splice(usernames.indexOf(socket.username), 1);
+    updateUsernames();
+  })
 });
 
 

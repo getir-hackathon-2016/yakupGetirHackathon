@@ -22,22 +22,29 @@ angular.module('myApp')
       $scope.addCart = function(product_id){
         $http.post('/cart/' + product_id, {}).success(function (data, status) {
           $scope.cart = data.cart;
-          $location.path('/cart');
         });
+        console.log("path");
+        $location.path('/cart');
       };
     }])
-    .controller('CartController', ['$scope', '$http', function ($scope, $http) {
+    .controller('CartController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
       console.log('CartController');
       $http.get('/cart').success(function (data, status) {
         $scope.cart = data.cart;
       });
 
+      $scope.emptyCart = function(){
+        $http.delete('/cart').success(function (data, status) {
+          $scope.cart = data.cart;
+        });
+        $location.path('/cart');
+      };
     }])
 
     .controller('AddressController',['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
       $scope.latitude = 0;
       $scope.longitude = 0;
-
+      console.log('AddressController');
       getLocation(function(position){
         $scope.latitude = round(position.coords.latitude, 5);
         $scope.longitude = round(position.coords.longitude, 5);
