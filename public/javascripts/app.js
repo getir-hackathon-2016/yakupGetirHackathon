@@ -26,6 +26,24 @@ angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps'])
       }
     })
 
+    .controller('AddressController',['$scope', '$http', '$routeParams', '$location', function ($scope, $http, $routeParams, $location) {
+      $scope.latitude = 0;
+      $scope.longitude = 0;
+
+      getLocation(function(position){
+        $scope.latitude = position.coords.latitude;
+        $scope.longitude = position.coords.longitude;
+      });
+
+      $scope.addAdress = function () {
+        $scope.address = {title: $scope.title, latitude: $scope.latitude, longitude: $scope.longitude}
+        console.log($scope.address);
+        $http.post('/address', $scope.address).success(function (data, status) {
+          console.log(status);
+        });
+      }
+    }])
+
     .controller('MapsController', ['$scope', '$timeout', '$http', 'uiGmapGoogleMapApi', function ($scope, $timeout, $http, uiGmapGoogleMapApi) {
       $scope.onMarkerClicked = function (marker) {
         marker.showWindow = true;
@@ -33,20 +51,11 @@ angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps'])
         //window.alert("Marker: lat: " + marker.latitude + ", lon: " + marker.longitude + " clicked!!")
       };
 
-      $scope.getLocation = function() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition($scope.setPosition);
-        } else {
-          x.innerHTML = "Geolocation is not supported by this browser.";
-        }
-      };
 
       $scope.setPosition = function (position) {
         $scope.latitude = position.coords.latitude;
         $scope.longitude = position.coords.longitude;
 
-        console.log($scope.latitude);
-        console.log($scope.longitude);
         $scope.map.center = {
           latitude: $scope.latitude, longitude: $scope.longitude
         };
@@ -112,7 +121,6 @@ angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps'])
           }
         };
         _.each($scope.map.markers, function (marker) {
-          console.log('markers')
           marker.closeClick = function () {
             marker.showWindow = false;
             $scope.$evalAsync();
@@ -124,7 +132,7 @@ angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps'])
 
       };
 
-      $scope.getLocation();
+      getLocation($scope.setPosition);
 
       uiGmapGoogleMapApi.then(function(maps) {
         $scope.map = {
@@ -141,3 +149,11 @@ angular.module('myApp', ['ngRoute', 'uiGmapgoogle-maps'])
       });
 
     }]);
+
+var getLocation = function(callback) {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(callback);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+};

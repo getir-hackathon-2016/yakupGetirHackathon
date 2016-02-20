@@ -13,11 +13,15 @@ var multer = require('multer');
 var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/getir');
+//mongoose.connect('mongodb://yakup:yakup@ds059145.mongolab.com:59145/heroku_3w4mc2h0');
 var db = mongoose.connection;
 
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var address = require('./routes/address');
 
 var app = express();
 
@@ -82,6 +86,7 @@ app.get('*', function (req, res, next) {
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/address', address);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

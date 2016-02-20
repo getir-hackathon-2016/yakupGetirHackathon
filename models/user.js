@@ -1,10 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://localhost/getir');
-//mongoose.connect('mongodb://yakup:yakup@ds059145.mongolab.com:59145/heroku_3w4mc2h0');
-var db = mongoose.connection;
-
 // User Schema
 var UserSchema = mongoose.Schema({
   username: {

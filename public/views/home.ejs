@@ -1,0 +1,21 @@
+<div class="row">
+  <div ng-controller="MapsController">
+    <% include maps/map.ejs %>
+  </div>
+  <div class="col-lg-4" ng-controller="AddressController">
+    <form ng-submit="addAdress()">
+      <div class="form-group">
+        <input type="text" placeholder="Enter Address Title" ng-model="title" name="title" class="form-control" />
+      </div>
+      <input type="submit" class="btn btn-primary" value="Save Address"/>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <h1>Products</h1>
+  <p>
+    Welcome
+  </p>
+</div>
+
