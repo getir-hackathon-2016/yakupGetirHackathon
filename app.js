@@ -15,8 +15,8 @@ var flash = require('connect-flash');
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/getir');
-//mongoose.connect('mongodb://yakup:yakup@ds059145.mongolab.com:59145/heroku_3w4mc2h0');
+//mongoose.connect('mongodb://localhost/getir');
+mongoose.connect('mongodb://yakup:yakup@ds031098.mongolab.com:31098/heroku_xvj6pjrh');
 var db = mongoose.connection;
 
 

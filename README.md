@@ -1,3 +1,1 @@
-npm  install
-
-https://yakup-node-user-auth-app.herokuapp.com
+https://yakup-getirhackathon.herokuapp.com/
